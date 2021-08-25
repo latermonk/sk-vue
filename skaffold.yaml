@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+metadata:
+  name: sk-vue
+build:
+  artifacts:
+  - image: dockerfile-image
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - deployment.yaml
+portForward:
+- resourceType: service
+  resourceName: dockerfile-image
+  port: 8080
